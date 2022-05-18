@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <script type="text/javascript">
+    let socket = new WebSocket("wss://portal-qa.immerss.live/websocket");
+
+    socket.onopen = () => socket.send(JSON.stringify({"command":"subscribe","identifier":"{\"channel\":\"BackOfficeChannel\",\"room\":\"first\"}"}));
+
+    socket.onmessage = function(event) {
+      // console.log("[message] Data received from server:", event.data);
+      // debugger;
+      data = JSON.parse(event.data);
+      if (data.message.send_by === 'System Job'){
+        const newDiv = document.createElement("div");
+        const newContent = document.createTextNode(data.message.body);
+        newDiv.appendChild(newContent);
+
+        const currentDiv = document.getElementById("wss");
+        document.body.insertBefore(newDiv, currentDiv);
+        console.log(data.message.body);
+      }
+    };
+
+
+  </script>
+</head>
+<body>
+  <div id="wss"></div>
+
+</body>
