@@ -2,6 +2,19 @@
 <head>
   <script type="text/javascript">
     let socket = new WebSocket("wss://portal-qa.immerss.live/websocket");
+
+    window.onload = function() {
+      var context = new AudioContext();
+
+      document.querySelector('button').addEventListener('click', function() {
+        context.resume().then(() => {
+          console.log('Playback resumed successfully');
+        });
+      });
+
+    }
+
+
     var audio = new Audio('sound.mp3');
 
     socket.onopen = () => socket.send(JSON.stringify({"command":"subscribe","identifier":"{\"channel\":\"BackOfficeChannel\",\"room\":\"first\"}"}));
@@ -27,7 +40,8 @@
   </script>
 </head>
 <body>
-  <h2>Version 1</h2>
+  <h2>Version 1.0.1</h2>
+  <button>Interract</button>
   <div id="wss"></div>
 
 </body>
