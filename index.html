@@ -17,6 +17,7 @@
 
         const currentDiv = document.getElementById("wss");
         document.body.insertBefore(newDiv, currentDiv);
+        navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
         audio.play();
         console.log(data.message.body);
       }
